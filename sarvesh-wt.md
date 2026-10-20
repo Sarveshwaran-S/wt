@@ -715,22 +715,19 @@ driver = webdriver.Chrome()
 
 driver.get("http://127.0.0.1:5500/login.html")
 
-# Enter username
+
 driver.find_element(By.ID, "username").send_keys("admin")
 
-# Enter password
 driver.find_element(By.ID, "password").send_keys("12345")
 
-# Click login
 driver.find_element(By.ID, "loginBtn").click()
 
 time.sleep(1)
 
-# Get result
 result = driver.find_element(By.ID, "message").text
 print(result)
 
-# Verify result
+
 assert result == "Login Successful"
 
 print("Test Passed!")
