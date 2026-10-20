@@ -766,3 +766,45 @@ driver.quit()
 </html>
 
 ```
+
+
+//normal postman
+
+
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+
+let student = [
+    {id: 1, name: "vignesh", mark: 90},
+    {id: 2, name: "sarvesh", mark: 100}
+];
+
+app.get('/', (req, res) => {
+    res.send("Welcome to student details");
+});
+
+app.get('/students', (req, res) => {
+    res.send(student);
+});
+
+app.post('/students', (req, res) => {
+    student.push(req.body);
+    res.send("student added");
+});
+
+app.put('/student/:id', (req, res) => {
+    let s = student.find(x => x.id == req.params.id);
+    if (s) Object.assign(s, req.body);
+    res.send("student updated");
+});
+
+app.delete('/student/:id', (req, res) => {
+    student = student.filter(x => x.id != req.params.id);
+    res.send("Student deleted");
+});
+
+app.listen(8080, () => {
+    console.log("Server running on port 8080");
+});
